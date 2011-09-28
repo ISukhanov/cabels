@@ -26,19 +26,19 @@ $cmsConfig['mailerEmail'] = '';
 // базы данных
 $cmsConfig['db'] = array ();
 $cmsConfig['db']['main'] = array ();
-$cmsConfig['db']['main']['host'] = 'vitrine.mysql.dev';
+$cmsConfig['db']['main']['host'] = 'localhost';
 $cmsConfig['db']['main']['port'] = 3306;
-$cmsConfig['db']['main']['user'] = 'orsnadm';
-$cmsConfig['db']['main']['pass'] = 'orsnadm-vitrine';
-$cmsConfig['db']['main']['name'] = 'vitrine';
+$cmsConfig['db']['main']['user'] = 'root';
+$cmsConfig['db']['main']['pass'] = '';
+$cmsConfig['db']['main']['name'] = 'cabels';
 $cmsConfig['db']['main']['timeout'] = 1;
 
 $cmsConfig['db']['alter'] = array ();
-$cmsConfig['db']['alter']['host'] = 'vitrine.mysql.dev';
-$cmsConfig['db']['alter']['port'] = 3306;
-$cmsConfig['db']['alter']['user'] = 'orsnadm';
-$cmsConfig['db']['alter']['pass'] = 'orsnadm-vitrine';
-$cmsConfig['db']['alter']['name'] = 'vitrine';
+$cmsConfig['db']['main']['host'] = 'localhost';
+$cmsConfig['db']['main']['port'] = 3306;
+$cmsConfig['db']['main']['user'] = 'root';
+$cmsConfig['db']['main']['pass'] = '';
+$cmsConfig['db']['main']['name'] = 'cabels';
 $cmsConfig['db']['alter']['timeout'] = 1;
 
 
