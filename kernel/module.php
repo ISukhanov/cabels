@@ -8,12 +8,10 @@ abstract class Module {
      *
      * @var User
      */
-    protected $user;
 
     final public function __construct($name = '') {
         if (empty($name)) throw new Exception('Module name can not be empty');
         $this->modname = $name;
-        $this->user = User::getInstance();
         if (method_exists($this, 'init'))
             $this->init();
     }
@@ -25,8 +23,7 @@ abstract class Module {
         {
             if ($cmsConfig['errorsLevel'] == ERRORS_LEVEL_HARD)
             {
-                print 'Module "' . $this->modname . '" does not have method "' . $action . '"; ' .
-                    'user_group = ' . $this->user->group_prefix;
+                print 'Module "' . $this->modname . '" does not have method "' . $action . '"; ';
             }
             $action = self::DEFAULT_METHOD;
         }

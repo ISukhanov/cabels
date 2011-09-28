@@ -4,9 +4,7 @@ require_once dirname(__FILE__) . '/database.php';
 require_once dirname(__FILE__) . '/module.php';
 require_once dirname(__FILE__) . '/outcontrol.php';
 require_once dirname(__FILE__) . '/request.php';
-require_once dirname(__FILE__) . '/user.php';
 require_once dirname(__FILE__) . '/utils.php';
-require_once dirname(__FILE__) . '/event.php';
 
 final class Kernel {
 
@@ -18,7 +16,7 @@ final class Kernel {
     private $xml = array ();
     private $xsl = array ();
     private $css = array ();
-    private $outputHeader = 'text/html';
+    public $outputHeader = 'text/html';
     private $user_prefix;
     private $debug = '';
 
@@ -28,31 +26,7 @@ final class Kernel {
         $this->xml[] = '<?xml version="1.0" encoding="' . $cmsConfig['dataEncoding'] . '"?><globalpage>';
         $this->xsl = array ();
 
-        $this->user_prefix = User::getInstance()->group_prefix;
-        $this->createImagePaths();
-
         $this->debug = new Request(array ('show' => array ()), Request::METHOD_REQUEST);
-    }
-
-    private function createImagePaths()
-    {
-        global $cmsConfig;
-        if (!file_exists($cmsConfig['vitrinesPath'] . '/0')) // структура папок еще не создана
-        {
-            if (! is_writeable($cmsConfig['vitrinesPath'])) {
-                throw new Exception('check write rights on ' . $cmsConfig['imagesPath']);
-            }
-            for ($i = 0x0; $i < 0x10; $i++)
-            {
-                mkdir($cmsConfig['vitrinesPath'] . '/' . strtoupper(dechex($i)));
-                chmod($cmsConfig['vitrinesPath'] . '/' . strtoupper(dechex($i)), 0777);
-                for ($j = 0x0; $j < 0x10; $j++)
-                {
-                    mkdir($cmsConfig['vitrinesPath'] . '/' . strtoupper(dechex($i)) . '/' . strtoupper(dechex($j)));
-                    chmod($cmsConfig['vitrinesPath'] . '/' . strtoupper(dechex($i)) . '/' . strtoupper(dechex($j)), 0777);
-                }
-            }
-        }
     }
 
     public function __get ($name) {
@@ -68,7 +42,7 @@ final class Kernel {
 		if (is_string($xsl)) $this->xsl[] = $xsl;
 	}
 
-    public function callModule ($mod, $actName = false, $args = false, $user_prefix = '') {
+    public function callModule ($mod, $actName = false, $args = false, $user_prefix = 'user') {
         global $cmsConfig;
         if (empty($mod)) return false;
         if (empty ($user_prefix)) $user_prefix = $this->user_prefix;
