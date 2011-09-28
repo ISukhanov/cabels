@@ -1,6 +1,6 @@
 <?php
 
-	include dirname(__FILE__) .'/../kernel/kernel.php';
+	include dirname(__FILE__) .'/../../kernel/kernel.php';
 	$CMS = new Kernel();
 	if ($CMS->callModule('index', null, null, 'admin'))
 	{
