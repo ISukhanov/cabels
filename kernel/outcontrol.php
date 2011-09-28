@@ -11,6 +11,8 @@ final class OutControl extends XMLBuilder {
     private $modname = '';
     private $actname = '';
 
+	private $user_type;
+
     protected $tagname = '';
     protected $xsl = '';
     protected $css = '';
@@ -45,15 +47,15 @@ final class OutControl extends XMLBuilder {
      * @param string or false $xsl
      * @param string or false $css
      */
-    public function __construct($modname, $actname, $xsl = '', $css = '') {
+    public function __construct($modname, $actname, $user_type = 'user', $xsl = '', $css = '') {
         global $cmsConfig;
 
         $this->modname = $modname;
         $this->actname = $actname;
         $this->tagname = $modname . '_' . $actname;
+        $this->user_type = $user_type;
         if (is_string($xsl)) {
-            $user = User::getInstance();
-            $this->xsl = $cmsConfig['templatesPath'] . '/' . $user->group_prefix . '/' . (empty ($xsl) ? $this->tagname : $xsl) . '.xsl';
+            $this->xsl = $cmsConfig['templatesPath'] . '/' . $this->user_type . '/' . (empty ($xsl) ? $this->tagname : $xsl) . '.xsl';
         }
         if (is_string($css)) {
             if (empty ($css))
