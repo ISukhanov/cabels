@@ -2,7 +2,7 @@
 
 	include dirname(__FILE__) .'/../../kernel/kernel.php';
 	$CMS = new Kernel();
-	if ($CMS->callModule('index', null, null, 'admin'))
+	if ($CMS->callModule('index', false, false, 'admin'))
 	{
 		$output = $CMS->compile();
 		// мы посылаем хедер только после компиляции на случай, если произойдёт ошибка,
